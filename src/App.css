@@ -1,0 +1,24 @@
+#root {
+
+  margin: 0 auto;
+  width: 95vw;
+  text-align: center;
+}
+.options{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 0.6rem;
+
+}
+input {
+  background-color: #ffebb3;
+  color: #5a3e2b;
+  font-family: inherit;
+  border: none;
+  border-radius: 10rem;
+  padding: 0.2rem 1.2rem;
+
+  cursor: pointer;
+}

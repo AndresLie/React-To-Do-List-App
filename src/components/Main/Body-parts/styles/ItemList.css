@@ -1,0 +1,11 @@
+.list-group{
+    height: 60vh;
+    padding: 0;
+    border: thick double;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    width: 67vw;
+    text-align: center;
+    margin: 0 auto;
+}

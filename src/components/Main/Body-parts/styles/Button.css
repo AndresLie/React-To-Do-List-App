@@ -1,0 +1,14 @@
+.btn.btn-outline-dark{
+    position: fixed;
+    left: 88vw;
+    width: 10vw;
+    top: 90vh;
+}
+.btn.btn-outline-warning{
+    text-wrap: wrap;
+    width: 15vw;
+}
+.btn.btn-outline-danger{
+    height: 50%;
+    width: 15vw;
+}

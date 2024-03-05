@@ -1,0 +1,14 @@
+.list-group-item{
+    list-style-type: none;
+    /* border: 0.3rem solid; */
+    border-radius: 2%;
+    height: 12vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+.item-box{
+    display:flex;
+    flex-direction: column;
+    width:75%
+    /* justify-content: space-evenly; */
+}
