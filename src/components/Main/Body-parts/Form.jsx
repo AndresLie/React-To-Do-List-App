@@ -34,7 +34,7 @@ export default function Form({onAddTask}){
     
     return (
     <form className="form" onSubmit={handleSubmit} id='newTaskForm'>
-        <Input style={{width:'40%'}} placeholder="Things To do.." className='input-task' value={task} onChange={(e)=>setTask((task)=>e.target.value) }></Input>
+        <Input style={{}} placeholder="Things To do.." className='input-task' value={task} onChange={(e)=>setTask((task)=>e.target.value) }></Input>
         <span>
             {"Due : "} 
         <DatePickerDemo date={date} setDate={setDate} onChange={(e)=>setDate((date)=>e.target.value)}

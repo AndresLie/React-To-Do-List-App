@@ -12,3 +12,13 @@
     height: 50%;
     width: 15vw;
 }
+
+@media screen and (max-width: 992px) {
+    .btn.btn-outline-warning{
+        text-wrap: wrap;
+        width: 17vw;
+        font-size: 0.85rem;
+        display: flex;
+        justify-content: center;
+    }
+  }

@@ -16,3 +16,21 @@
     width: 100vw;
     
 }
+
+@media screen and (max-width: 992px) {
+    .form{
+      justify-content: space-between;
+    }
+    .input-task{
+        width: 20%;
+        height:1.4rem;
+        
+    }
+    .w-full {
+        width: 30%;
+    }
+    span{
+        font-size: 0.8rem;
+    }
+
+  }

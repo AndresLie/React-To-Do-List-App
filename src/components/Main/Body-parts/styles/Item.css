@@ -9,6 +9,8 @@
 .item-box{
     display:flex;
     flex-direction: column;
-    width:75%
+    width:75%;
+    overflow: hidden;
+    
     /* justify-content: space-evenly; */
 }
