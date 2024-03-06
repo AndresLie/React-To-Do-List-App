@@ -11,24 +11,17 @@ import RemoveFinishedButton from './components/Main/Body-parts/RemoveFinishedBut
 import Main from './components/Main/Main.jsx'
 import Item from './components/Main/Body-parts/Item/Item.jsx'
 import { useState } from 'react'
-import { useLocalStorageState } from './useLocalStorageState.jsx'
+import {useMediaQuery} from 'react-responsive'
 import { Toaster } from "@/components/ui/sonner"
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
+import { DialogDemo } from './components/Main/Body-parts/Dialog.jsx'
+
 
 function App({tasks,setTask}) {
   const [openForm,setOpenForm]=useState(false)
-  const [sort,setSort]=useState('input')
 
+  const [sort,setSort]=useState('input')
+  const isDesktopOrLaptop=useMediaQuery({query:'(min-width:992px)'})
+  const isTabOrMobile=useMediaQuery({query:'(max-width:992px)'})
   let sortedTask=[]
   if(sort==='input') sortedTask=tasks
   else if(sort==='alphabet'){
@@ -67,7 +60,10 @@ function App({tasks,setTask}) {
     });
   }
   function handleOpenForm(){
-    setOpenForm((val)=>!val)
+    if(isDesktopOrLaptop)setOpenForm((val)=>!val)
+    else if(isTabOrMobile) SetOpenDialog((val)=>!val)
+      
+    
   }
   function handleAddTask(newTask){
     if (!newTask.name) return
@@ -105,9 +101,13 @@ function App({tasks,setTask}) {
           <Item task={task} key={task.id} handleRemove={handleRemove} handleFinished={handleFinished}/>
         ))}
       </ItemList>
-      <AddButton onClick={handleOpenForm}>
+      {isTabOrMobile&&<DialogDemo onAddTask={handleAddTask}/>}
+
+      {isDesktopOrLaptop&&
+        <AddButton onClick={handleOpenForm}>
         {openForm?"Cancel":"Add"}
       </AddButton>
+      }
     </Main>
     <Toaster />
     </>

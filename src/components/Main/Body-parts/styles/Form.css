@@ -16,6 +16,9 @@
     width: 100vw;
     
 }
+.mobile-add-btn{
+    margin-top: 1.5rem;
+}
 
 @media screen and (max-width: 992px) {
     .form{

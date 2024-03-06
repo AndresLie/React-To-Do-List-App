@@ -9,3 +9,9 @@
     text-align: center;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 992px) {
+    .list-group{
+        width: 80vw;
+    }
+}

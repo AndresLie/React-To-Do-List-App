@@ -11,17 +11,18 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover"
 import { useState } from "react"
+import { useMediaQuery } from "react-responsive"
 
 export function DatePickerDemo({date,setDate}) {
 
-
+  const isMobile=useMediaQuery({query:'(max-width:992px)'})
   return (
     <Popover>
       <PopoverTrigger asChild>
         <Button
           variant={"outline"}
           className={cn(
-            "justify-start text-left font-normal",
+            `${isMobile?"w-[40vw]":"w-[15vw]"} justify-start text-left font-normal`,
             !date && "text-muted-foreground"
           )}
         >
