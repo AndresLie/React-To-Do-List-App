@@ -19,14 +19,26 @@ export default function Form({onAddTask}){
             finished: false,
             important
           };
-        const formattedDate = date.toISOString().split('T')[0];
-        toast("New Task Added", {
-            description: date?`${task} is Due on ${formattedDate}`:`Added ${task}`,
-            action: {
-            //   label: "Undo",
-            //   onClick: () => console.log("Undo"),
-            },
-          })
+        if (date) {
+            const newDate = new Date(date.getTime()); // Clone date to avoid mutating the original state
+            newDate.setDate(newDate.getDate() + 1);
+            const formattedDate = newTask.date ? newDate.toISOString().split('T')[0] : "";
+            toast("New Task Added", {
+                description: `${task} is Due on ${formattedDate}`,
+                action: {
+                    // label: "Undo",
+                    // onClick: () => console.log("Undo"),
+                },
+            });
+        } else {
+            toast("New Task Added", {
+                description: `Added ${task}`,
+                action: {
+                    // label: "Undo",
+                    // onClick: () => console.log("Undo"),
+                },
+            });
+        }
         onAddTask(newTask)
         setDate("")
         setTask("")

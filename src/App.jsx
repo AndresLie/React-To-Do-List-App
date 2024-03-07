@@ -62,7 +62,7 @@ function App({tasks,setTask}) {
   }
   function handleOpenForm(){
     if(isDesktopOrLaptop)setOpenForm((val)=>!val)
-    else if(isTabOrMobile) SetOpenDialog((val)=>!val)
+
       
     
   }

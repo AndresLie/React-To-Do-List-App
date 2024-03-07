@@ -22,7 +22,7 @@ export function DatePickerDemo({date,setDate}) {
         <Button
           variant={"outline"}
           className={cn(
-            `${isMobile?"w-[40vw]":"w-[15vw]"} justify-start text-left font-normal`,
+            `${isMobile?"w-[317%]":"w-[15vw]"} justify-start text-left font-normal`,
             !date && "text-muted-foreground"
           )}
         >

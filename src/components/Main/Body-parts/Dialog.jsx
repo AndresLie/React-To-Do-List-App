@@ -32,15 +32,28 @@ export function DialogDemo({onAddTask}) {
             finished: false,
             important
           };
-          const formattedDate = date.toISOString().split('T')[0];
-          toast("New Task Added", {
-              position:'top-center',
-              description: date?`${task} is Due on ${formattedDate}`:`Added ${task}`,
-              action: {
-              //   label: "Undo",
-              //   onClick: () => console.log("Undo"),
-              },
-            })
+          if (date) {
+            const newDate = new Date(date.getTime()); // Clone date to avoid mutating the original state
+            newDate.setDate(newDate.getDate() + 1);
+            const formattedDate = newTask.date ? newDate.toISOString().split('T')[0] : "";
+            toast("New Task Added", {
+                position:'top-center',
+                description: `${task} is Due on ${formattedDate}`,
+                action: {
+                    // label: "Undo",
+                    // onClick: () => console.log("Undo"),
+                },
+            });
+        } else {
+            toast("New Task Added", {
+                position:'top-center',
+                description: `Added ${task}`,
+                action: {
+                    // label: "Undo",
+                    // onClick: () => console.log("Undo"),
+                },
+            });
+        }
         onAddTask(newTask)
         setDate("")
         setTask("")
@@ -86,7 +99,7 @@ export function DialogDemo({onAddTask}) {
             </div>  
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button type="submit">Add</Button>
         </DialogFooter>
             </form>
       </DialogContent>
