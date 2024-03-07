@@ -9,6 +9,11 @@
     text-align: center;
     margin: 0 auto;
 }
+.disabled {
+    pointer-events: none; /* Prevents clicking */
+    color: grey; /* Makes the text look disabled */
+    opacity: 0.5; /* Optional: makes the list semi-transparent */
+  }
 
 @media screen and (max-width: 992px) {
     .list-group{

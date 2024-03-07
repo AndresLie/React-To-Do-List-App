@@ -12,14 +12,15 @@ import Main from './components/Main/Main.jsx'
 import Item from './components/Main/Body-parts/Item/Item.jsx'
 import { useState } from 'react'
 import {useMediaQuery} from 'react-responsive'
-import { Toaster } from "@/components/ui/sonner"
 import { DialogDemo } from './components/Main/Body-parts/Dialog.jsx'
-
+import { Toaster } from 'sonner'
+import { toast } from "sonner"
 
 function App({tasks,setTask}) {
   const [openForm,setOpenForm]=useState(false)
 
   const [sort,setSort]=useState('input')
+  const [disableList,setDisableList]=useState(false)
   const isDesktopOrLaptop=useMediaQuery({query:'(min-width:992px)'})
   const isTabOrMobile=useMediaQuery({query:'(max-width:992px)'})
   let sortedTask=[]
@@ -76,14 +77,25 @@ function App({tasks,setTask}) {
   function handleSort(type){
     setSort(()=>type)
   }
-  function handleRemove(id){
+  function handleRemove(id,task){
     setTask((tasks) =>tasks.filter((task)=>task.id!=id))
+    toast(`${task.name} removed`, {
+      position:`${isTabOrMobile?"top-center":'bottom-right'}`,
+
+      action: {
+        label: "Undo",
+        onClick: () => handleAddTask(task),
+      },
+    })
   }
   function handleFinished(id){
     setTask((tasks)=>tasks.map((task)=>task.id===id?{...task,finished: !task.finished}:task))
   }
   function handleRemoveFinished(){
     setTask((tasks)=> tasks.filter((task)=>!task.finished))
+  }
+  function handleSelectOpen(open){
+    setDisableList(()=>open)
   }
 
   return (
@@ -92,11 +104,11 @@ function App({tasks,setTask}) {
     <Main>
       {openForm && <Form onAddTask={handleAddTask}/>}
       <div className='options'>
-        <SortOption handleSort={handleSort}/>
+        <SortOption handleSort={handleSort} handleOpen={handleSelectOpen}/>
         <RemoveFinishedButton handleFinished={handleRemoveFinished} />
         <ClearButon handleClick={handleClearItem}/>
       </div>
-      <ItemList>
+      <ItemList enable={disableList}>
         {sortedTask.map((task)=>(
           <Item task={task} key={task.id} handleRemove={handleRemove} handleFinished={handleFinished}/>
         ))}
@@ -109,7 +121,7 @@ function App({tasks,setTask}) {
       </AddButton>
       }
     </Main>
-    <Toaster />
+    <Toaster closeButton/>
     </>
   )
 }

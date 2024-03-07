@@ -22,6 +22,9 @@ export function DialogDemo({onAddTask}) {
     function handleSubmit(e){
         e.preventDefault()
         if(!task) return
+        if (document.activeElement && ['INPUT', 'TEXTAREA', 'BUTTON'].includes(document.activeElement.tagName)) {
+          document.activeElement.blur();
+        }
         const newTask = {
             name: task,
             date: date ? date.toLocaleDateString() : "",
@@ -30,6 +33,7 @@ export function DialogDemo({onAddTask}) {
             important
           };
         toast("New Task Added", {
+            position:'top-center',
             description: date?`${task} is Due on ${date}`:`Added ${task}`,
             action: {
             //   label: "Undo",

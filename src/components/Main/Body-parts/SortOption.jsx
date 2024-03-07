@@ -10,13 +10,16 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-export default function SortOption({handleSort}){
+export default function SortOption({handleSort,handleOpen}){
     const [sort,setSort]=useState("input")
     useEffect(()=>handleSort(sort),[sort])
+    const handleOpenChange = (open) => {
+        handleOpen(open)
+      };
     return(
         <div className="sort-option">
         <span>Sort By : </span>
-        <Select className="sort-option" value={sort} onValueChange={setSort} >
+        <Select className="sort-option" value={sort} onValueChange={setSort} onOpenChange={handleOpenChange}>
         <SelectTrigger>
             <SelectValue placeholder="input" />
         </SelectTrigger>

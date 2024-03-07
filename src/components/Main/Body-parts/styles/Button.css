@@ -15,7 +15,7 @@
 
 @media screen and (max-width: 992px) {
     .btn.btn-outline-warning{
-        text-wrap: wrap;
+        text-wrap: wrap; 
         width: 17vw;
         font-size: 0.85rem;
         display: flex;
