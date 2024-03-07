@@ -1,16 +1,21 @@
 .list-group-item{
     list-style-type: none;
-    /* border: 0.3rem solid; */
     border-radius: 2%;
-    height: 12vh;
+    height: 15vh;
     display: flex;
     justify-content: space-evenly;
+    align-items: center;
 }
 .item-box{
     display:flex;
     flex-direction: column;
     width:75%;
     overflow: hidden;
-    font-size: 0.8rem;
-    /* justify-content: space-evenly; */
+    font-size: 0.85rem;
+    justify-content: space-evenly;
+}
+@media screen and (max-width: 992px) {
+    .list-group-item{
+        height:9vh;
+    }
 }

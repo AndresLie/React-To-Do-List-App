@@ -19,8 +19,9 @@ export default function Form({onAddTask}){
             finished: false,
             important
           };
+        const formattedDate = date.toISOString().split('T')[0];
         toast("New Task Added", {
-            description: date?`${task} is Due on ${date}`:`Added ${task}`,
+            description: date?`${task} is Due on ${formattedDate}`:`Added ${task}`,
             action: {
             //   label: "Undo",
             //   onClick: () => console.log("Undo"),

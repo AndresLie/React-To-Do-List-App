@@ -31,15 +31,20 @@ export function DatePickerDemo({date,setDate}) {
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
-        <Calendar
-          mode="single"
-          selected={date}
-          onSelect={setDate}
-          disabled={(date) =>
-            date < new Date() 
-          }
-          initialFocus
-        />
+      <Calendar
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        disabled={(date) => {
+          // Create a new date object for "today" with the time set to 00:00:00.000
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          // Disable dates before today
+          return date < today;
+        }}
+        initialFocus
+      />
       </PopoverContent>
     </Popover>
   )

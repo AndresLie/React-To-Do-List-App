@@ -15,7 +15,7 @@ export default function Item({ task, handleRemove,handleFinished }) {
                 {task.name}
                 <span>Due : {task.date ? task.date : "None"}</span>
             </div>
-            <Button variant="destructive" onClick={() => handleRemove(task.id,task)}>Remove</Button>
+            <Button variant="destructive" onClick={() => handleRemove(task.id,task.name)}>Remove</Button>
         </li>
     );
 }

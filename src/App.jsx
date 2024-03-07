@@ -77,14 +77,15 @@ function App({tasks,setTask}) {
   function handleSort(type){
     setSort(()=>type)
   }
-  function handleRemove(id,task){
+  function handleRemove(id,name){
+    const oldTask=tasks
     setTask((tasks) =>tasks.filter((task)=>task.id!=id))
-    toast(`${task.name} removed`, {
+    toast(`${name} removed`, {
       position:`${isTabOrMobile?"top-center":'bottom-right'}`,
 
       action: {
         label: "Undo",
-        onClick: () => handleAddTask(task),
+        onClick: () => setTask(()=>oldTask),
       },
     })
   }

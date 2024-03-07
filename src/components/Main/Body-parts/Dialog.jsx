@@ -32,14 +32,15 @@ export function DialogDemo({onAddTask}) {
             finished: false,
             important
           };
-        toast("New Task Added", {
-            position:'top-center',
-            description: date?`${task} is Due on ${date}`:`Added ${task}`,
-            action: {
-            //   label: "Undo",
-            //   onClick: () => console.log("Undo"),
-            },
-          })
+          const formattedDate = date.toISOString().split('T')[0];
+          toast("New Task Added", {
+              position:'top-center',
+              description: date?`${task} is Due on ${formattedDate}`:`Added ${task}`,
+              action: {
+              //   label: "Undo",
+              //   onClick: () => console.log("Undo"),
+              },
+            })
         onAddTask(newTask)
         setDate("")
         setTask("")
