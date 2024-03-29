@@ -10,8 +10,7 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-export default function SortOption({handleSort,handleOpen}){
-    const [sort,setSort]=useState("input")
+export default function SortOption({handleSort,handleOpen,sort,setSort}){
     useEffect(()=>handleSort(sort),[sort])
     const handleOpenChange = (open) => {
         handleOpen(open)
