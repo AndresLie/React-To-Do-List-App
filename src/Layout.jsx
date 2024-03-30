@@ -19,9 +19,10 @@ import App from "./App"
 import { useEffect, useState } from "react"
 import { useLocalStorageState } from "./useLocalStorageState"
 import { Accordion_ } from "./components/Schedule/Acccordion"
+import { TaskProvider, useTask } from "./context/TaskContext"
 
 export default function Layout() {
-    const[tasks,setTask]=useLocalStorageState([],'myTask')
+    const{tasks,setTask}=useTask()
     let sortedTask=[]
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1); // Set to yesterday
@@ -50,18 +51,18 @@ export default function Layout() {
 
     
   return (
+    
     <Tabs defaultValue="main" className="">
       <TabsList className="grid w-full grid-cols-2">
         <TabsTrigger value="main">Main</TabsTrigger>
         <TabsTrigger value="schedule">Schedule</TabsTrigger>
       </TabsList>
       <TabsContent value="main">
-        <App tasks={tasks} setTask={setTask}/>
+        <App />
       </TabsContent>
       <TabsContent value="schedule">
         <Accordion_ task={taskByDate} n={taskByDate.length} />
       </TabsContent>
-      
     </Tabs>
   )
 }

@@ -11,7 +11,9 @@ import {
     AlertDialogTrigger,
   } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
-export default function ClearButon({handleClick}){
+import { useTask } from '../../../context/TaskContext'
+export default function ClearButon(){
+  const {handleClearItem}=useTask()
     return (
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -27,7 +29,7 @@ export default function ClearButon({handleClick}){
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleClick}>Yes I'm Sure</AlertDialogAction>
+              <AlertDialogAction onClick={handleClearItem}>Yes I'm Sure</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

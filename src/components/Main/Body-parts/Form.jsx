@@ -4,7 +4,9 @@ import { Input } from "@/components/ui/input"
 // import { useToast } from "@/components/ui/use-toast"
 import { toast } from "sonner"
 import { DatePickerDemo } from './Item/DatePicker'
-export default function Form({onAddTask}){
+import { useTask } from '../../../context/TaskContext'
+export default function Form(){
+    const {onAddTask}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
     const [important,setImportant]=useState(false)

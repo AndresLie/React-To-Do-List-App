@@ -10,7 +10,9 @@ import {
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
-export default function SortOption({handleSort,handleOpen,sort,setSort}){
+import { useTask } from '../../../context/TaskContext'
+export default function SortOption({handleOpen,sort,setSort}){
+    const {handleSort}=useTask()
     useEffect(()=>handleSort(sort),[sort])
     const handleOpenChange = (open) => {
         handleOpen(open)

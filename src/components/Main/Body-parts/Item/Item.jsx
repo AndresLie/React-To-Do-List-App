@@ -1,9 +1,10 @@
 import { useState } from "react";
 import "../styles/item.css";
 import { Button } from "@/components/ui/button";
+import { useTask } from "../../../../context/TaskContext";
 
-export default function Item({ task, handleRemove,handleFinished }) {
-    // Correctly define `importantStyle` as an object with the `fill` property as a string
+export default function Item({ task }) {
+    const {handleFinished,handleRemove}=useTask()
 
     let style={}
     if(task.finished) style={ backgroundColor: 'rgb(60, 179, 113)' };

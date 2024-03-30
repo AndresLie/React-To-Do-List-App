@@ -14,7 +14,9 @@ import { DatePickerDemo } from "./Item/DatePicker"
 import { useState } from "react"
 import { toast } from "sonner"
 import './styles/Form.css'
-export function DialogDemo({onAddTask}) {
+import { useTask } from "../../../context/TaskContext"
+export function DialogDemo() {
+    const {onAddTask}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
     const [important,setImportant]=useState(false)
