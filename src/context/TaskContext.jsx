@@ -74,11 +74,6 @@ function TaskProvider({children}){
         return Number(a.finished) - Number(b.finished);
         });
     }
-
-
-      function handleClearItem(){
-        dispatch({type:'task/clear'})
-      }
       function handleSort(type){
         setSort(type)
       }

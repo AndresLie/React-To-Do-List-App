@@ -15,7 +15,7 @@ import { useState,memo } from "react"
 import { toast } from "sonner"
 import './styles/Form.css'
 import { useTask } from "../../../context/TaskContext"
-function DialogDemo() {
+const DialogDemoComponent=()=>{
     const {onAddTask}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
@@ -109,6 +109,4 @@ function DialogDemo() {
         
   )
 }
-
-
-export default memo(DialogDemo)
+export const DialogDemo = memo(DialogDemoComponent);
