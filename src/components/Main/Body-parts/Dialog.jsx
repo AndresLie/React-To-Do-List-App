@@ -11,11 +11,11 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { DatePickerDemo } from "./Item/DatePicker"
-import { useState } from "react"
+import { useState,memo } from "react"
 import { toast } from "sonner"
 import './styles/Form.css'
 import { useTask } from "../../../context/TaskContext"
-export function DialogDemo() {
+function DialogDemo() {
     const {onAddTask}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
@@ -109,3 +109,6 @@ export function DialogDemo() {
         
   )
 }
+
+
+export default memo(DialogDemo)

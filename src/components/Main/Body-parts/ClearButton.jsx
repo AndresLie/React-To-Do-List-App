@@ -12,7 +12,8 @@ import {
   } from "@/components/ui/alert-dialog"
 import { Button } from "@/components/ui/button"
 import { useTask } from '../../../context/TaskContext'
-export default function ClearButon(){
+import {memo} from 'react'
+function ClearButon(){
   const {handleClearItem}=useTask()
     return (
         <AlertDialog>
@@ -35,3 +36,5 @@ export default function ClearButon(){
         </AlertDialog>
       )
 }
+
+export default memo(ClearButon)

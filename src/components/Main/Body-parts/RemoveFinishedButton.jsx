@@ -1,9 +1,13 @@
-import { useContext } from 'react'
+import {memo} from 'react'
 import './styles/Button.css'
 import { useTask } from '../../../context/TaskContext'
-export default function RemoveFinishedButton(){
-    const {handleRemoveFinished}=useTask()
+function RemoveFinishedButton(){
+    const {dispatch}=useTask()
     return(
-        <button type="button" className="btn btn-outline-warning" onClick={handleRemoveFinished}>Remove Finished Task</button>
+        <button type="button" className="btn btn-outline-warning" onClick={()=>dispatch({type:'task/removeFinished'})}>
+            Remove Finished Task
+        </button>
     )
 }
+
+export default memo(RemoveFinishedButton)

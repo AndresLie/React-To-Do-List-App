@@ -1,14 +1,3 @@
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   Tabs,
   TabsContent,
@@ -16,13 +5,11 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import App from "./App"
-import { useEffect, useState } from "react"
-import { useLocalStorageState } from "./useLocalStorageState"
+import { memo } from "react"
 import { Accordion_ } from "./components/Schedule/Acccordion"
-import { TaskProvider, useTask } from "./context/TaskContext"
-
-export default function Layout() {
-    const{tasks,setTask}=useTask()
+import { useTask } from "./context/TaskContext"
+function Layout() {
+    const{tasks}=useTask()
     let sortedTask=[]
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1); // Set to yesterday
@@ -66,3 +53,5 @@ export default function Layout() {
     </Tabs>
   )
 }
+
+export default memo(Layout)
