@@ -1,17 +1,17 @@
-import { useState } from "react";
+import { memo} from "react";
 import "../styles/item.css";
 import { Button } from "@/components/ui/button";
 import { useTask } from "../../../../context/TaskContext";
 
-export default function Item({ task }) {
-    const {handleFinished,handleRemove}=useTask()
+function Item({ task }) {
+    const {dispatch,handleRemove}=useTask()
 
     let style={}
     if(task.finished) style={ backgroundColor: 'rgb(60, 179, 113)' };
     else if(task.important) style={ backgroundColor: 'coral' };
     return (
         <li className="list-group-item" style={style}>
-            <input type='checkbox' checked={task.finished} onChange={()=>handleFinished(task.id)}></input>
+            <input type='checkbox' checked={task.finished} onChange={()=>dispatch({type:'task/toggleFinished',id:task.id})}></input>
             <div className="item-box">
                 {task.name}
                 <span>Due : {task.date ? task.date : "None"}</span>
@@ -20,3 +20,5 @@ export default function Item({ task }) {
         </li>
     );
 }
+
+export default memo(Item)

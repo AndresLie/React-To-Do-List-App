@@ -1,18 +1,42 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext,useReducer,useEffect,useCallback } from "react";
 import { useLocalStorageState } from "../useLocalStorageState";
-import { Toaster } from 'sonner'
 import { toast } from "sonner"
 import { useMediaQuery } from "react-responsive";
 const TaskContext=createContext()
 
+function taskReducer(state, action) {
+  switch (action.type) {
+    case 'task/add':
+      return [...state, action.payload];
+    case 'task/remove':
+      return state.filter(task => task.id !== action.id);
+    case 'task/clear':
+      return [];
+    case 'task/toggleFinished':
+      return state.map(task =>
+        task.id === action.id ? { ...task, finished: !task.finished } : task
+      );
+    case 'task/removeFinished':
+      return state.filter(task => !task.finished);
+    case 'task/undo':
+      return action.payload;
+    default:
+      throw new Error(`Unhandled action type: ${action.type}`);
+  }
+}
+
 
 
 function TaskProvider({children}){
-    const[tasks,setTask]=useLocalStorageState([],'myTask')
+    const [initialTasks, setTask] = useLocalStorageState([], 'myTask');
+    const [tasks, dispatch] = useReducer(taskReducer, initialTasks);
     const [sort,setSort]=useLocalStorageState('','last_sort')
     const isDesktopOrLaptop=useMediaQuery({query:'(min-width:992px)'})
     const isTabOrMobile=useMediaQuery({query:'(max-width:992px)'})
     let sortedTask=[]
+    useEffect(() => {
+      setTask(tasks);
+    }, [tasks]);
     if(sort==='')setSort('input')
     if(sort==='input') sortedTask=tasks
     else if(sort==='alphabet'){
@@ -51,47 +75,35 @@ function TaskProvider({children}){
         });
     }
 
-      function handleAddTask(newTask){
-        if (!newTask.name) return
-        setTask((tasks)=>[...tasks,newTask])
-        sortedTask=tasks
-      }
+
       function handleClearItem(){
-        setTask([])
+        dispatch({type:'task/clear'})
       }
       function handleSort(type){
         setSort(type)
       }
       function handleRemove(id,name){
         const oldTask=tasks
-        setTask((tasks) =>tasks.filter((task)=>task.id!=id))
+        dispatch({type:'task/remove',id:id})
         toast(`${name} removed`, {
           position:`${isTabOrMobile?"top-center":'bottom-right'}`,
     
           action: {
             label: "Undo",
-            onClick: () => setTask(()=>oldTask),
+            onClick: () => dispatch({type:'task/undo',payload:oldTask}),
           },
         })
-      }
-      function handleFinished(id){
-        setTask((tasks)=>tasks.map((task)=>task.id===id?{...task,finished: !task.finished}:task))
-      }
-      function handleRemoveFinished(){
-        setTask((tasks)=> tasks.filter((task)=>!task.finished))
       }
 
     return <TaskContext.Provider value={{
         tasks,
-        onAddTask:handleAddTask,
         handleSort:handleSort ,
-        handleRemoveFinished,
         handleClearItem,
         handleRemove,
-        handleFinished,
         isDesktopOrLaptop,
         isTabOrMobile,
-        sortedTask
+        sortedTask,
+        dispatch
     }}>
         {children}
     </TaskContext.Provider>

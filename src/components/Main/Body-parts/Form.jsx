@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import { DatePickerDemo } from './Item/DatePicker'
 import { useTask } from '../../../context/TaskContext'
 export default function Form(){
-    const {onAddTask}=useTask()
+    const {dispatch}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
     const [important,setImportant]=useState(false)
@@ -27,21 +27,13 @@ export default function Form(){
             const formattedDate = newTask.date ? newDate.toISOString().split('T')[0] : "";
             toast("New Task Added", {
                 description: `${task} is Due on ${formattedDate}`,
-                action: {
-                    // label: "Undo",
-                    // onClick: () => console.log("Undo"),
-                },
             });
         } else {
             toast("New Task Added", {
                 description: `Added ${task}`,
-                action: {
-                    // label: "Undo",
-                    // onClick: () => console.log("Undo"),
-                },
             });
         }
-        onAddTask(newTask)
+        dispatch({ type: 'task/add', payload: newTask });
         setDate("")
         setTask("")
         setImportant(false)

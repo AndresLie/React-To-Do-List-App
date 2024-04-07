@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, memo } from 'react'
 import './styles/SortOption.css'
 
 import {
@@ -6,12 +6,11 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    SelectLabel,
     SelectTrigger,
     SelectValue,
   } from "@/components/ui/select"
 import { useTask } from '../../../context/TaskContext'
-export default function SortOption({handleOpen,sort,setSort}){
+function SortOption({handleOpen,sort,setSort}){
     const {handleSort}=useTask()
     useEffect(()=>handleSort(sort),[sort])
     const handleOpenChange = (open) => {
@@ -38,3 +37,4 @@ export default function SortOption({handleOpen,sort,setSort}){
         </div>
     )
 }
+export default memo(SortOption)
