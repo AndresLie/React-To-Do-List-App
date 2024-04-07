@@ -6,7 +6,7 @@ import { toast } from "sonner"
 import { DatePickerDemo } from './Item/DatePicker'
 import { useTask } from '../../../context/TaskContext'
 export default function Form(){
-    const {dispatch}=useTask()
+    const {dispatchTask}=useTask()
     const[date,setDate]=useState(null)
     const [task,setTask]=useState("")
     const [important,setImportant]=useState(false)
@@ -33,7 +33,7 @@ export default function Form(){
                 description: `Added ${task}`,
             });
         }
-        dispatch({ type: 'task/add', payload: newTask });
+        dispatchTask({ type: 'task/add', payload: newTask });
         setDate("")
         setTask("")
         setImportant(false)

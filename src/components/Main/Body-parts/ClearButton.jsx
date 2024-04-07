@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button"
 import { useTask } from '../../../context/TaskContext'
 import {memo} from 'react'
 function ClearButon(){
-  const {handleClearItem}=useTask()
+  const {dispatchTask}=useTask()
     return (
         <AlertDialog>
           <AlertDialogTrigger asChild>
@@ -30,7 +30,7 @@ function ClearButon(){
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleClearItem}>Yes I'm Sure</AlertDialogAction>
+              <AlertDialogAction onClick={()=>dispatchTask({type:'task/clear'})}>Yes I'm Sure</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
